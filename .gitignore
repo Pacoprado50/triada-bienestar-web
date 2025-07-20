@@ -1,0 +1,27 @@
+# Archivos de configuración de Visual Studio Code
+.vscode/
+
+# Archivos temporales o de caché
+*.log
+*.tmp
+
+# Archivos de respaldo de los PDFs (si no quieres versionarlos)
+*.pdf
+
+# Si usas Node.js para alguna herramienta (aunque no sea un proyecto Node.js principal)
+node_modules/
+
+# Archivos de sistema operativo (macOS)
+.DS_Store
+
+# Archivos de sistema operativo (Windows)
+Thumbs.db
+
+# Archivos de respaldo de editores de texto comunes
+*~
+*.bak
+*.swp
+*.swo
+
+# Archivos de caché de Botpress (si se generan localmente)
+.botpress/
