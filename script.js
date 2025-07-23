@@ -1,259 +1,616 @@
-// Mobile Navigation Toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-menu a');
+// Triada Bienestar - JavaScript Mejorado
+// =====================================
 
-    // Toggle mobile menu
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+// Configuración global
+const CONFIG = {
+    whatsappNumber: '5214581019800',
+    animationDuration: 300,
+    scrollOffset: 80,
+    debounceDelay: 10
+};
 
-    // Close mobile menu when clicking on a link
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
+// Utilidades
+const Utils = {
+    // Debounce function para optimizar eventos
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
-    });
-});
+    // Throttle function para scroll events
+    throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    },
 
-// Smooth Scrolling for Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const headerOffset = 80;
-            const elementPosition = target.offsetTop;
-            const offsetPosition = elementPosition - headerOffset;
+    // Smooth scroll mejorado
+    smoothScrollTo(target, offset = CONFIG.scrollOffset) {
+        const element = document.querySelector(target);
+        if (element) {
+            const elementPosition = element.offsetTop;
+            const offsetPosition = elementPosition - offset;
 
             window.scrollTo({
                 top: offsetPosition,
                 behavior: 'smooth'
             });
         }
-    });
-});
+    },
 
-// Header Background on Scroll
-window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.98)';
-        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.boxShadow = 'none';
+    // Generar mensaje de WhatsApp personalizado
+    generateWhatsAppMessage(serviceName = '') {
+        const baseMessage = 'Hola, me gustaría agendar una cita para un masaje';
+        return serviceName 
+            ? `${baseMessage} de ${serviceName}. ¿Podrían ayudarme con la información y disponibilidad?`
+            : `${baseMessage}. ¿Podrían ayudarme con la información y disponibilidad?`;
+    },
+
+    // Detectar si es dispositivo móvil
+    isMobile() {
+        return window.innerWidth <= 768;
+    },
+
+    // Lazy loading para imágenes
+    lazyLoadImage(img) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const image = entry.target;
+                    if (image.dataset.src) {
+                        image.src = image.dataset.src;
+                        image.classList.remove('lazy');
+                        observer.unobserve(image);
+                    }
+                }
+            });
+        });
+        imageObserver.observe(img);
     }
-});
-
-// Intersection Observer for Animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('loaded');
+// Navegación móvil mejorada
+class MobileNavigation {
+    constructor() {
+        this.hamburger = document.querySelector('.hamburger');
+        this.navMenu = document.querySelector('.nav-menu');
+        this.navLinks = document.querySelectorAll('.nav-menu a');
+        this.isOpen = false;
+        
+        this.init();
+    }
+
+    init() {
+        if (this.hamburger && this.navMenu) {
+            this.hamburger.addEventListener('click', () => this.toggle());
+            this.navLinks.forEach(link => {
+                link.addEventListener('click', () => this.close());
+            });
+            
+            // Cerrar menú al hacer click fuera
+            document.addEventListener('click', (e) => {
+                if (!this.hamburger.contains(e.target) && !this.navMenu.contains(e.target)) {
+                    this.close();
+                }
+            });
+
+            // Cerrar menú con tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.isOpen) {
+                    this.close();
+                }
+            });
         }
-    });
-}, observerOptions);
+    }
 
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', function() {
-    const animatedElements = document.querySelectorAll('.service-card, .contact-item, .social-link, .location-image');
-    animatedElements.forEach(el => {
-        el.classList.add('loading');
-        observer.observe(el);
-    });
-});
+    toggle() {
+        this.isOpen ? this.close() : this.open();
+    }
 
-// Service Cards Hover Effect
-document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
+    open() {
+        this.hamburger.classList.add('active');
+        this.navMenu.classList.add('active');
+        this.isOpen = true;
+        document.body.style.overflow = 'hidden'; // Prevenir scroll
+    }
 
-// WhatsApp Button Click Tracking
-document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
-    link.addEventListener('click', function() {
-        // You can add analytics tracking here
-        console.log('WhatsApp link clicked');
-    });
-});
-
-// Social Media Links Click Tracking
-document.querySelectorAll('.social-link').forEach(link => {
-    link.addEventListener('click', function() {
-        const platform = this.classList.contains('facebook') ? 'Facebook' : 
-                         this.classList.contains('instagram') ? 'Instagram' : 'Google Maps';
-        console.log(`${platform} link clicked`);
-    });
-});
-
-// Form Validation (if needed for future contact forms)
-function validateForm(form) {
-    const inputs = form.querySelectorAll('input[required], textarea[required]');
-    let isValid = true;
-
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.classList.add('error');
-        } else {
-            input.classList.remove('error');
-        }
-    });
-
-    return isValid;
+    close() {
+        this.hamburger.classList.remove('active');
+        this.navMenu.classList.remove('active');
+        this.isOpen = false;
+        document.body.style.overflow = ''; // Restaurar scroll
+    }
 }
 
-// Lazy Loading for Images
-function lazyLoadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
+// Header con efectos de scroll
+class HeaderEffects {
+    constructor() {
+        this.header = document.querySelector('.header');
+        this.lastScrollY = window.scrollY;
+        
+        this.init();
+    }
+
+    init() {
+        if (this.header) {
+            const throttledScroll = Utils.throttle(() => this.handleScroll(), 16);
+            window.addEventListener('scroll', throttledScroll);
+        }
+    }
+
+    handleScroll() {
+        const currentScrollY = window.scrollY;
+        
+        // Agregar clase 'scrolled' cuando se hace scroll
+        if (currentScrollY > 100) {
+            this.header.classList.add('scrolled');
+        } else {
+            this.header.classList.remove('scrolled');
+        }
+
+        this.lastScrollY = currentScrollY;
+    }
+}
+
+// Animaciones de elementos al entrar en viewport
+class ScrollAnimations {
+    constructor() {
+        this.observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        this.init();
+    }
+
+    init() {
+        this.observer = new IntersectionObserver(
+            (entries) => this.handleIntersection(entries),
+            this.observerOptions
+        );
+
+        // Observar elementos para animación
+        const animatedElements = document.querySelectorAll(
+            '.service-card, .contact-card, .social-link, .location-image, .section-header'
+        );
+        
+        animatedElements.forEach(el => {
+            el.classList.add('loading');
+            this.observer.observe(el);
+        });
+    }
+
+    handleIntersection(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
+                entry.target.classList.add('loaded');
+                // Dejar de observar el elemento una vez animado
+                this.observer.unobserve(entry.target);
             }
         });
-    });
-
-    images.forEach(img => imageObserver.observe(img));
-}
-
-// Initialize lazy loading
-document.addEventListener('DOMContentLoaded', lazyLoadImages);
-
-// Parallax Effect for Hero Section
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const heroImage = document.querySelector('.hero-image img');
-    
-    if (heroImage && scrolled < window.innerHeight) {
-        heroImage.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
-
-// Service Card Click to WhatsApp
-document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('click', function() {
-        const serviceName = this.querySelector('h3').textContent;
-        const whatsappUrl = `https://wa.me/5214581019800?text=Hola,%20me%20interesa%20el%20servicio%20de%20${encodeURIComponent(serviceName)}`;
-        window.open(whatsappUrl, '_blank');
-    });
-});
-
-// Add loading states for external links
-document.querySelectorAll('a[target="_blank"]').forEach(link => {
-    link.addEventListener('click', function() {
-        this.style.opacity = '0.7';
-        setTimeout(() => {
-            this.style.opacity = '1';
-        }, 1000);
-    });
-});
-
-// Keyboard Navigation Support
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        if (navMenu.classList.contains('active')) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
-    }
-});
-
-// Performance Optimization: Debounce Scroll Events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Apply debounce to scroll events
-const debouncedScrollHandler = debounce(function() {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.98)';
-        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.boxShadow = 'none';
-    }
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
-
-// Add touch support for mobile devices
-let touchStartY = 0;
-let touchEndY = 0;
-
-document.addEventListener('touchstart', function(e) {
-    touchStartY = e.changedTouches[0].screenY;
-});
-
-document.addEventListener('touchend', function(e) {
-    touchEndY = e.changedTouches[0].screenY;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartY - touchEndY;
-    
-    if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-            // Swipe up - could trigger some action
-            console.log('Swiped up');
-        } else {
-            // Swipe down - could trigger some action
-            console.log('Swiped down');
-        }
     }
 }
 
-// Initialize all functionality when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Triada Bienestar website loaded successfully');
-    
-    // Add any initialization code here
-    const loadingElements = document.querySelectorAll('.loading');
-    setTimeout(() => {
-        loadingElements.forEach(el => {
-            el.classList.add('loaded');
+// Gestión de servicios
+class ServiceManager {
+    constructor() {
+        this.serviceCards = document.querySelectorAll('.service-card');
+        this.init();
+    }
+
+    init() {
+        this.serviceCards.forEach(card => {
+            // Efecto hover mejorado
+            card.addEventListener('mouseenter', () => this.handleHover(card, true));
+            card.addEventListener('mouseleave', () => this.handleHover(card, false));
+            
+            // Click para WhatsApp
+            card.addEventListener('click', () => this.handleServiceClick(card));
+            
+            // Accesibilidad con teclado
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.handleServiceClick(card);
+                }
+            });
         });
-    }, 100);
-});
+    }
+
+    handleHover(card, isHovering) {
+        const overlay = card.querySelector('.service-overlay');
+        if (overlay) {
+            overlay.style.opacity = isHovering ? '1' : '0';
+        }
+    }
+
+    handleServiceClick(card) {
+        const serviceName = card.querySelector('h3')?.textContent || '';
+        const message = Utils.generateWhatsAppMessage(serviceName);
+        const whatsappUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+        
+        // Efecto visual de click
+        card.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            card.style.transform = '';
+        }, 150);
+        
+        // Abrir WhatsApp
+        window.open(whatsappUrl, '_blank');
+        
+        // Analytics (si se implementa)
+        this.trackServiceClick(serviceName);
+    }
+
+    trackServiceClick(serviceName) {
+        console.log(`Servicio clickeado: ${serviceName}`);
+        // Aquí se puede agregar tracking de analytics
+    }
+}
+
+// Navegación suave mejorada
+class SmoothNavigation {
+    constructor() {
+        this.navLinks = document.querySelectorAll('a[href^="#"]');
+        this.scrollIndicator = document.querySelector('.hero-scroll-indicator');
+        
+        this.init();
+    }
+
+    init() {
+        // Enlaces de navegación
+        this.navLinks.forEach(anchor => {
+            anchor.addEventListener('click', (e) => this.handleNavClick(e, anchor));
+        });
+
+        // Indicador de scroll en hero
+        if (this.scrollIndicator) {
+            this.scrollIndicator.addEventListener('click', () => {
+                Utils.smoothScrollTo('#servicios');
+            });
+        }
+    }
+
+    handleNavClick(e, anchor) {
+        e.preventDefault();
+        const targetId = anchor.getAttribute('href');
+        
+        if (targetId && targetId !== '#') {
+            Utils.smoothScrollTo(targetId);
+            
+            // Cerrar menú móvil si está abierto
+            const navMenu = document.querySelector('.nav-menu');
+            if (navMenu && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                document.querySelector('.hamburger')?.classList.remove('active');
+            }
+        }
+    }
+}
+
+// Gestión de enlaces externos
+class ExternalLinksManager {
+    constructor() {
+        this.externalLinks = document.querySelectorAll('a[target="_blank"]');
+        this.whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+        this.socialLinks = document.querySelectorAll('.social-link');
+        
+        this.init();
+    }
+
+    init() {
+        // Enlaces externos con efecto de loading
+        this.externalLinks.forEach(link => {
+            link.addEventListener('click', () => this.handleExternalClick(link));
+        });
+
+        // Enlaces de WhatsApp con tracking
+        this.whatsappLinks.forEach(link => {
+            link.addEventListener('click', () => this.trackWhatsAppClick());
+        });
+
+        // Enlaces sociales con tracking
+        this.socialLinks.forEach(link => {
+            link.addEventListener('click', () => this.trackSocialClick(link));
+        });
+    }
+
+    handleExternalClick(link) {
+        // Efecto visual de loading
+        const originalOpacity = link.style.opacity;
+        link.style.opacity = '0.7';
+        
+        setTimeout(() => {
+            link.style.opacity = originalOpacity;
+        }, 1000);
+    }
+
+    trackWhatsAppClick() {
+        console.log('WhatsApp link clicked');
+        // Analytics tracking
+    }
+
+    trackSocialClick(link) {
+        const platform = link.classList.contains('facebook') ? 'Facebook' : 
+                         link.classList.contains('instagram') ? 'Instagram' : 'Google Maps';
+        console.log(`${platform} link clicked`);
+        // Analytics tracking
+    }
+}
+
+// Efectos visuales avanzados
+class VisualEffects {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.initParallaxEffects();
+        this.initHoverEffects();
+        this.initLoadingStates();
+    }
+
+    initParallaxEffects() {
+        // Efecto parallax sutil para elementos decorativos
+        const decorativeElements = document.querySelectorAll('.decoration-circle, .decoration-triangle');
+        
+        if (decorativeElements.length > 0) {
+            const handleParallax = Utils.throttle(() => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                
+                decorativeElements.forEach(element => {
+                    element.style.transform = `translateY(${rate}px)`;
+                });
+            }, 16);
+
+            window.addEventListener('scroll', handleParallax);
+        }
+    }
+
+    initHoverEffects() {
+        // Efectos hover para tarjetas
+        const cards = document.querySelectorAll('.service-card, .contact-card, .location-image');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    }
+
+    initLoadingStates() {
+        // Estados de carga para elementos
+        const loadingElements = document.querySelectorAll('.loading');
+        
+        // Agregar delay escalonado para animaciones
+        loadingElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.classList.add('loaded');
+            }, index * 100);
+        });
+    }
+}
+
+// Optimizaciones de rendimiento
+class PerformanceOptimizer {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.optimizeImages();
+        this.preloadCriticalResources();
+        this.setupIntersectionObserver();
+    }
+
+    optimizeImages() {
+        // Lazy loading para imágenes
+        const images = document.querySelectorAll('img[data-src]');
+        images.forEach(img => Utils.lazyLoadImage(img));
+
+        // Optimizar imágenes existentes
+        const allImages = document.querySelectorAll('img');
+        allImages.forEach(img => {
+            img.loading = 'lazy';
+        });
+    }
+
+    preloadCriticalResources() {
+        // Precargar recursos críticos
+        const criticalImages = [
+            'images/logo_triada.png',
+            'images/imagen_masajes_profesionales_nueva.png'
+        ];
+
+        criticalImages.forEach(src => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = src;
+            document.head.appendChild(link);
+        });
+    }
+
+    setupIntersectionObserver() {
+        // Observer para elementos que requieren carga diferida
+        const lazyElements = document.querySelectorAll('.lazy-load');
+        
+        if (lazyElements.length > 0) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            lazyElements.forEach(el => observer.observe(el));
+        }
+    }
+}
+
+// Gestión de errores y fallbacks
+class ErrorHandler {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        // Manejo de errores de imágenes
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            img.addEventListener('error', () => this.handleImageError(img));
+        });
+
+        // Manejo de errores globales
+        window.addEventListener('error', (e) => this.handleGlobalError(e));
+    }
+
+    handleImageError(img) {
+        console.warn(`Error loading image: ${img.src}`);
+        img.style.display = 'none';
+    }
+
+    handleGlobalError(error) {
+        console.error('Global error:', error);
+        // Aquí se puede implementar reporting de errores
+    }
+}
+
+// Inicialización principal
+class TriadaBienestarApp {
+    constructor() {
+        this.components = [];
+        this.init();
+    }
+
+    init() {
+        // Esperar a que el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.initializeComponents());
+        } else {
+            this.initializeComponents();
+        }
+    }
+
+    initializeComponents() {
+        try {
+            // Inicializar todos los componentes
+            this.components = [
+                new MobileNavigation(),
+                new HeaderEffects(),
+                new ScrollAnimations(),
+                new ServiceManager(),
+                new SmoothNavigation(),
+                new ExternalLinksManager(),
+                new VisualEffects(),
+                new PerformanceOptimizer(),
+                new ErrorHandler()
+            ];
+
+            console.log('Triada Bienestar website initialized successfully');
+            this.setupAccessibility();
+            this.setupAnalytics();
+            
+        } catch (error) {
+            console.error('Error initializing Triada Bienestar app:', error);
+        }
+    }
+
+    setupAccessibility() {
+        // Mejorar accesibilidad
+        const focusableElements = document.querySelectorAll(
+            'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+        );
+
+        focusableElements.forEach(element => {
+            element.addEventListener('focus', () => {
+                element.style.outline = '2px solid var(--primary-color)';
+                element.style.outlineOffset = '2px';
+            });
+
+            element.addEventListener('blur', () => {
+                element.style.outline = '';
+                element.style.outlineOffset = '';
+            });
+        });
+    }
+
+    setupAnalytics() {
+        // Configurar analytics básico
+        const trackPageView = () => {
+            console.log('Page view tracked');
+            // Implementar tracking real aquí
+        };
+
+        const trackUserInteraction = (action, element) => {
+            console.log(`User interaction: ${action} on ${element}`);
+            // Implementar tracking real aquí
+        };
+
+        // Track page view
+        trackPageView();
+
+        // Track scroll depth
+        let maxScrollDepth = 0;
+        const trackScrollDepth = Utils.throttle(() => {
+            const scrollDepth = Math.round(
+                (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+            );
+            
+            if (scrollDepth > maxScrollDepth) {
+                maxScrollDepth = scrollDepth;
+                if (scrollDepth % 25 === 0) {
+                    console.log(`Scroll depth: ${scrollDepth}%`);
+                }
+            }
+        }, 1000);
+
+        window.addEventListener('scroll', trackScrollDepth);
+    }
+}
+
+// Inicializar la aplicación
+const app = new TriadaBienestarApp();
+
+// Exportar para uso global si es necesario
+window.TriadaBienestar = {
+    app,
+    utils: Utils,
+    config: CONFIG
+};
+
+// Service Worker registration (opcional)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+            });
+    });
+}
 
 
