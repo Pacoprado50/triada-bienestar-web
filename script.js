@@ -612,5 +612,14 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNR778R8HX">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-NNR778R8HX');
+</script>
 
