@@ -7,22 +7,27 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 <body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="es">Español</button>
+        <button class="lang-btn" data-lang="en">English</button>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <nav class="nav">
             <div class="nav-container">
                 <div class="logo">
                     <img src="images/logo_triada.png" alt="Triada Bienestar Logo">
-                    <span>Triada Bienestar</span>
+                    <span data-translate="logo">Triada Bienestar</span>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#ubicacion">Ubicación</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#inicio" data-translate="nav-home">Inicio</a></li>
+                    <li><a href="#servicios" data-translate="nav-services">Servicios</a></li>
+                    <li><a href="#ubicacion" data-translate="nav-location">Ubicación</a></li>
+                    <li><a href="#contacto" data-translate="nav-contact">Contacto</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -40,17 +45,17 @@
         </div>
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Masajes Profesionales</h1>
-                <p class="hero-subtitle">Equilibra tu ser - Siente, respira, renace</p>
-                <p class="hero-description">Descubre el poder transformador de nuestras técnicas especializadas de masaje terapéutico, diseñadas para restaurar tu bienestar integral.</p>
+                <h1 data-translate="hero-title">Masajes Profesionales</h1>
+                <p class="hero-subtitle" data-translate="hero-subtitle">Equilibra tu ser - Siente, respira, renace</p>
+                <p class="hero-description" data-translate="hero-description">Descubre el poder transformador de nuestras técnicas especializadas de masaje terapéutico, diseñadas para restaurar tu bienestar integral.</p>
                 <div class="hero-buttons">
                     <a href="#servicios" class="btn-primary">
-                        <span>Explorar Servicios</span>
+                        <span data-translate="btn-explore">Explorar Servicios</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                     <a href="https://wa.me/5214581019800" class="btn-secondary" target="_blank">
                         <i class="fab fa-whatsapp"></i>
-                        <span>Agendar Cita</span>
+                        <span data-translate="btn-schedule">Agendar Cita</span>
                     </a>
                 </div>
             </div>
@@ -72,8 +77,8 @@
     <section id="servicios" class="services">
         <div class="container">
             <div class="section-header">
-                <h2>Nuestros Servicios</h2>
-                <p class="section-subtitle">Técnicas especializadas para tu bienestar integral</p>
+                <h2 data-translate="services-title">Nuestros Servicios</h2>
+                <p class="section-subtitle" data-translate="services-subtitle">Técnicas especializadas para tu bienestar integral</p>
                 <div class="section-decoration"></div>
             </div>
             
@@ -87,11 +92,11 @@
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Masaje Ayurvédico</h3>
-                        <p>Medicina tradicional de la India que utiliza aceites medicados y movimientos específicos para equilibrar las energías vitales, desintoxicar el cuerpo y promover la relajación profunda.</p>
+                        <h3 data-translate="service-ayurveda-title">Masaje Ayurvédico</h3>
+                        <p data-translate="service-ayurveda-desc">Medicina tradicional de la India que utiliza aceites medicados y movimientos específicos para equilibrar las energías vitales, desintoxicar el cuerpo y promover la relajación profunda.</p>
                         <div class="service-benefits">
-                            <span class="benefit-tag">Equilibrio energético</span>
-                            <span class="benefit-tag">Desintoxicación</span>
+                            <span class="benefit-tag" data-translate="benefit-energy">Equilibrio energético</span>
+                            <span class="benefit-tag" data-translate="benefit-detox">Desintoxicación</span>
                         </div>
                     </div>
                 </div>
@@ -105,11 +110,11 @@
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Masaje Sueco</h3>
-                        <p>Técnica clásica que utiliza movimientos largos y fluidos, amasamiento y fricción para relajar los músculos, mejorar la circulación y aliviar la tensión corporal.</p>
+                        <h3 data-translate="service-swedish-title">Masaje Sueco</h3>
+                        <p data-translate="service-swedish-desc">Técnica clásica que utiliza movimientos largos y fluidos, amasamiento y fricción para relajar los músculos, mejorar la circulación y aliviar la tensión corporal.</p>
                         <div class="service-benefits">
-                            <span class="benefit-tag">Relajación muscular</span>
-                            <span class="benefit-tag">Mejora circulación</span>
+                            <span class="benefit-tag" data-translate="benefit-muscle">Relajación muscular</span>
+                            <span class="benefit-tag" data-translate="benefit-circulation">Mejora circulación</span>
                         </div>
                     </div>
                 </div>
@@ -123,11 +128,11 @@
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Quiromasaje</h3>
-                        <p>Técnica manual que utiliza diversas manipulaciones sobre los tejidos blandos para aliviar dolores musculares, mejorar la circulación y promover el bienestar general.</p>
+                        <h3 data-translate="service-chiro-title">Quiromasaje</h3>
+                        <p data-translate="service-chiro-desc">Técnica manual que utiliza diversas manipulaciones sobre los tejidos blandos para aliviar dolores musculares, mejorar la circulación y promover el bienestar general.</p>
                         <div class="service-benefits">
-                            <span class="benefit-tag">Alivio del dolor</span>
-                            <span class="benefit-tag">Bienestar general</span>
+                            <span class="benefit-tag" data-translate="benefit-pain">Alivio del dolor</span>
+                            <span class="benefit-tag" data-translate="benefit-wellness">Bienestar general</span>
                         </div>
                     </div>
                 </div>
@@ -141,11 +146,11 @@
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Masaje Shiatsu</h3>
-                        <p>Terapia japonesa que utiliza presión de dedos y palmas sobre puntos específicos del cuerpo para equilibrar la energía vital y mejorar la salud general.</p>
+                        <h3 data-translate="service-shiatsu-title">Masaje Shiatsu</h3>
+                        <p data-translate="service-shiatsu-desc">Terapia japonesa que utiliza presión de dedos y palmas sobre puntos específicos del cuerpo para equilibrar la energía vital y mejorar la salud general.</p>
                         <div class="service-benefits">
-                            <span class="benefit-tag">Equilibrio energético</span>
-                            <span class="benefit-tag">Salud integral</span>
+                            <span class="benefit-tag" data-translate="benefit-energy">Equilibrio energético</span>
+                            <span class="benefit-tag" data-translate="benefit-health">Salud integral</span>
                         </div>
                     </div>
                 </div>
@@ -159,11 +164,11 @@
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Masaje Craneofacial</h3>
-                        <p>Técnica especializada en cabeza, cara, cuello y hombros que ayuda a aliviar tensión, estrés, dolores de cabeza y migrañas, mejorando la circulación.</p>
+                        <h3 data-translate="service-cranio-title">Masaje Craneofacial</h3>
+                        <p data-translate="service-cranio-desc">Técnica especializada en cabeza, cara, cuello y hombros que ayuda a aliviar tensión, estrés, dolores de cabeza y migrañas, mejorando la circulación.</p>
                         <div class="service-benefits">
-                            <span class="benefit-tag">Alivio de migrañas</span>
-                            <span class="benefit-tag">Reduce estrés</span>
+                            <span class="benefit-tag" data-translate="benefit-migraine">Alivio de migrañas</span>
+                            <span class="benefit-tag" data-translate="benefit-stress">Reduce estrés</span>
                         </div>
                     </div>
                 </div>
@@ -177,11 +182,11 @@
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Masaje Champi</h3>
-                        <p>Técnica tradicional india enfocada en cabeza, cuello y hombros que alivia la tensión, mejora la circulación del cuero cabelludo y promueve la calma.</p>
+                        <h3 data-translate="service-champi-title">Masaje Champi</h3>
+                        <p data-translate="service-champi-desc">Técnica tradicional india enfocada en cabeza, cuello y hombros que alivia la tensión, mejora la circulación del cuero cabelludo y promueve la calma.</p>
                         <div class="service-benefits">
-                            <span class="benefit-tag">Relajación profunda</span>
-                            <span class="benefit-tag">Mejora capilar</span>
+                            <span class="benefit-tag" data-translate="benefit-relaxation">Relajación profunda</span>
+                            <span class="benefit-tag" data-translate="benefit-scalp">Mejora capilar</span>
                         </div>
                     </div>
                 </div>
@@ -195,11 +200,11 @@
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Masaje Sotai</h3>
-                        <p>Terapia japonesa de reeducación postural que corrige desequilibrios y alivia el dolor a través de movimientos suaves y naturales guiados por el terapeuta.</p>
+                        <h3 data-translate="service-sotai-title">Masaje Sotai</h3>
+                        <p data-translate="service-sotai-desc">Terapia japonesa de reeducación postural que corrige desequilibrios y alivia el dolor a través de movimientos suaves y naturales guiados por el terapeuta.</p>
                         <div class="service-benefits">
-                            <span class="benefit-tag">Corrección postural</span>
-                            <span class="benefit-tag">Movimiento natural</span>
+                            <span class="benefit-tag" data-translate="benefit-posture">Corrección postural</span>
+                            <span class="benefit-tag" data-translate="benefit-movement">Movimiento natural</span>
                         </div>
                     </div>
                 </div>
@@ -213,11 +218,11 @@
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Masaje Holístico</h3>
-                        <p>Enfoque integral que considera cuerpo, mente y espíritu, combinando diversas técnicas para abordar el bienestar físico, emocional y mental.</p>
+                        <h3 data-translate="service-holistic-title">Masaje Holístico</h3>
+                        <p data-translate="service-holistic-desc">Enfoque integral que considera cuerpo, mente y espíritu, combinando diversas técnicas para abordar el bienestar físico, emocional y mental.</p>
                         <div class="service-benefits">
-                            <span class="benefit-tag">Bienestar integral</span>
-                            <span class="benefit-tag">Equilibrio total</span>
+                            <span class="benefit-tag" data-translate="benefit-integral">Bienestar integral</span>
+                            <span class="benefit-tag" data-translate="benefit-balance">Equilibrio total</span>
                         </div>
                     </div>
                 </div>
@@ -229,15 +234,15 @@
     <section id="ubicacion" class="location">
         <div class="container">
             <div class="section-header">
-                <h2>Nuestra Ubicación</h2>
-                <p class="section-subtitle">Un espacio diseñado para tu tranquilidad y bienestar</p>
+                <h2 data-translate="location-title">Nuestra Ubicación</h2>
+                <p class="section-subtitle" data-translate="location-subtitle">Un espacio diseñado para tu tranquilidad y bienestar</p>
                 <div class="section-decoration"></div>
             </div>
             
             <div class="location-content">
                 <div class="location-info">
                     <div class="location-details">
-                        <h3>Cabina de Masaje</h3>
+                        <h3 data-translate="cabin-title">Cabina de Masaje</h3>
                         <div class="address">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>Retorno Centella 7, SM 18, Cancún, Qroo.</span>
@@ -247,19 +252,19 @@
                             <div class="location-image">
                                 <img src="images/entrada_principal.jpg" alt="Entrada Principal">
                                 <div class="image-overlay">
-                                    <span>Entrada Principal</span>
+                                    <span data-translate="entrance-label">Entrada Principal</span>
                                 </div>
                             </div>
                             <div class="location-image">
                                 <img src="images/cabina_horizontal.jpg" alt="Cabina de Masaje">
                                 <div class="image-overlay">
-                                    <span>Cabina de Masaje</span>
+                                    <span data-translate="cabin-label">Cabina de Masaje</span>
                                 </div>
                             </div>
                             <div class="location-image">
                                 <img src="images/cabina_vertical.jpg" alt="Ambiente Relajante">
                                 <div class="image-overlay">
-                                    <span>Ambiente Relajante</span>
+                                    <span data-translate="environment-label">Ambiente Relajante</span>
                                 </div>
                             </div>
                         </div>
@@ -269,8 +274,8 @@
                                 <i class="fas fa-home"></i>
                             </div>
                             <div class="note-content">
-                                <h4>Servicio a Domicilio</h4>
-                                <p>Si prefieres recibir el masaje en la comodidad de tu hogar, ofrecemos servicio a domicilio con un costo adicional por transportación (ida y regreso).</p>
+                                <h4 data-translate="home-service-title">Servicio a Domicilio</h4>
+                                <p data-translate="home-service-desc">Si prefieres recibir el masaje en la comodidad de tu hogar, ofrecemos servicio a domicilio con un costo adicional por transportación (ida y regreso).</p>
                             </div>
                         </div>
                     </div>
@@ -278,16 +283,17 @@
                 
                 <div class="map-container">
                     <iframe 
-                        src="https://www.google.com/maps/place/Centella+7,+77505+Canc%C3%BAn,+Q.R./@21.1523682,-86.8295287,17z/data=!4m16!1m9!3m8!1s0x8f4c2bfbcbb667ed:0x6a3600ebb47863e8!2sCentella+7,+77505+Canc%C3%BAn,+Q.R.!3b1!8m2!3d21.1523497!4d-86.8293209!10e5!16s%2Fg%2F11c26rsdzz!3m5!1s0x8f4c2bfbcbb667ed:0x6a3600ebb47863e8!8m2!3d21.1523497!4d-86.8293209!16s%2Fg%2F11c26rsdzz?authuser=0&entry=ttu&g_ep=EgoyMDI1MTAwMS4wIKXMDSoASAFQAw%3D%3D"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3722.8!2d-86.8293209!3d21.1523497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2bfbcbb667ed%3A0x6a3600ebb47863e8!2sCentella%207%2C%2077505%20Canc%C3%BAn%2C%20Q.R.%2C%20Mexico!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus"
                         width="100%" 
                         height="400" 
                         style="border:0;" 
                         allowfullscreen="" 
-                        loading="lazy">
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                     <div class="map-overlay">
                         <div class="map-info">
-                            <h4>Visítanos</h4>
+                            <h4 data-translate="visit-us">Visítanos</h4>
                             <p>Cancún, Quintana Roo</p>
                         </div>
                     </div>
@@ -300,14 +306,14 @@
     <section id="contacto" class="contact">
         <div class="container">
             <div class="section-header">
-                <h2>Contacto y Redes Sociales</h2>
-                <p class="section-subtitle">Conecta con nosotros y agenda tu sesión de bienestar</p>
+                <h2 data-translate="contact-title">Contacto y Redes Sociales</h2>
+                <p class="section-subtitle" data-translate="contact-subtitle">Conecta con nosotros y agenda tu sesión de bienestar</p>
                 <div class="section-decoration"></div>
             </div>
             
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Información de Contacto</h3>
+                    <h3 data-translate="contact-info-title">Información de Contacto</h3>
                     <div class="contact-cards">
                         <div class="contact-card">
                             <div class="contact-icon">
@@ -316,7 +322,7 @@
                             <div class="contact-details">
                                 <h4>WhatsApp</h4>
                                 <p>458-101-9800</p>
-                                <small>Previa cita requerida</small>
+                                <small data-translate="appointment-required">Previa cita requerida</small>
                             </div>
                         </div>
                         
@@ -325,69 +331,41 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="contact-details">
-                                <h4>Ubicación</h4>
-                                <p>Centella 7<br>SM 18, Cancún, Qroo.</p>
+                                <h4 data-translate="address-title">Dirección</h4>
+                                <p>Retorno Centella 7, SM 18</p>
+                                <small>Cancún, Quintana Roo</small>
                             </div>
                         </div>
-
-                        <div class="contact-card important">
+                        
+                        <div class="contact-card">
                             <div class="contact-icon">
-                                <i class="fas fa-calendar-check"></i>
+                                <i class="fas fa-clock"></i>
                             </div>
                             <div class="contact-details">
-                                <h4>Importante</h4>
-                                <p>La programación de los masajes es con previa cita al número de WhatsApp. Te enviaremos un formulario para completar tu información y confirmar tu cita.</p>
+                                <h4 data-translate="hours-title">Horarios</h4>
+                                <p data-translate="hours-schedule">Lunes a Viernes</p>
+                                <small data-translate="hours-time">9:00 AM - 8:00 PM PREVIA CITA</small>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="social-media">
-                    <h3>Síguenos en Redes Sociales</h3>
+                
+                <div class="social-section">
+                    <h3 data-translate="social-title">Síguenos en Redes Sociales</h3>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/TriadaBienestar" target="_blank" class="social-link facebook">
-                            <div class="social-icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </div>
-                            <div class="social-info">
-                                <span class="social-name">Facebook</span>
-                                <span class="social-handle">Triada Bienestar</span>
-                            </div>
+                        <a href="https://www.facebook.com/profile.php?id=61566434844051" target="_blank" class="social-link facebook">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
                         </a>
-                        <a href="https://www.instagram.com/bienestartriada" target="_blank" class="social-link instagram">
-                            <div class="social-icon">
-                                <i class="fab fa-instagram"></i>
-                            </div>
-                            <div class="social-info">
-                                <span class="social-name">Instagram</span>
-                                <span class="social-handle">@bienestartriada</span>
-                            </div>
+                        <a href="https://www.instagram.com/triada_bienestar/" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
                         </a>
-                        <a href="https://www.google.com/maps/place/Centella+7,+77505+Canc%C3%BAn,+Q.R./@21.1523682,-86.8295287,17z/data=!4m16!1m9!3m8!1s0x8f4c2bfbcbb667ed:0x6a3600ebb47863e8!2sCentella+7,+77505+Canc%C3%BAn,+Q.R.!3b1!8m2!3d21.1523497!4d-86.8293209!10e5!16s%2Fg%2F11c26rsdzz!3m5!1s0x8f4c2bfbcbb667ed:0x6a3600ebb47863e8!8m2!3d21.1523497!4d-86.8293209!16s%2Fg%2F11c26rsdzz?authuser=0&entry=ttu&g_ep=EgoyMDI1MTAwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="social-link maps">
-                            <div class="social-icon">
-                                <i class="fas fa-map-marked-alt"></i>
-                            </div>
-                            <div class="social-info">
-                                <span class="social-name">Google Maps</span>
-                                <span class="social-handle">Ver ubicación</span>
-                            </div>
+                        <a href="https://maps.app.goo.gl/YourGoogleMapsLink" target="_blank" class="social-link maps">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-translate="maps-link">Google Maps</span>
                         </a>
                     </div>
-                </div>
-            </div>
-
-            <div class="cta-section">
-                <div class="cta-content">
-                    <h3>¿Listo para tu sesión de relajación?</h3>
-                    <p>Agenda tu cita ahora y comienza tu camino hacia el bienestar integral</p>
-                    <a href="https://wa.me/5214581019800?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20masaje" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>Agendar Cita por WhatsApp</span>
-                    </a>
-                </div>
-                <div class="cta-decoration">
-                    <div class="decoration-circle"></div>
-                    <div class="decoration-triangle"></div>
                 </div>
             </div>
         </div>
@@ -397,89 +375,21 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img src="images/logo_triada.png" alt="Triada Bienestar">
-                        <span>Triada Bienestar</span>
-                    </div>
-                    <p class="footer-tagline">Equilibra tu ser - Siente, respira, renace</p>
-                    <div class="footer-social">
-                        <a href="https://www.facebook.com/TriadaBienestar" target="_blank">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://www.instagram.com/bienestartriada" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://wa.me/5214581019800" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
+                <div class="footer-logo">
+                    <img src="images/logo_triada.png" alt="Triada Bienestar Logo">
+                    <span data-translate="logo">Triada Bienestar</span>
                 </div>
-                
-                <div class="footer-links">
-                    <h4>Enlaces Rápidos</h4>
-                    <ul>
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
-                        <li><a href="#ubicacion">Ubicación</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4>Contacto</h4>
-                    <div class="footer-contact-item">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>458-101-9800</span>
-                    </div>
-                    <div class="footer-contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Cancún, Qroo.</span>
-                    </div>
-                </div>
-                
-                <div class="footer-newsletter">
-                    <h4>Mantente Conectado</h4>
-                    <p>Síguenos en nuestras redes sociales para tips de bienestar y promociones especiales.</p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    <p>&copy; 2024 Triada Bienestar. Todos los derechos reservados.</p>
-                </div>
-                <div class="footer-credits">
-                    <p>Diseñado con <i class="fas fa-heart"></i> para tu bienestar</p>
+                <div class="footer-text">
+                    <p data-translate="footer-text">&copy; 2024 Triada Bienestar. Todos los derechos reservados.</p>
+                    <p data-translate="footer-subtitle">Equilibra tu ser - Siente, respira, renace</p>
                 </div>
             </div>
         </div>
     </footer>
 
-        <script src="script.js"></script>
-
-    <!-- Botpress Webchat -->
-    <script src="https://cdn.botpress.cloud/webchat/v3.1/inject.js"></script>
-    <script>
-      window.botpress.init({
-        "botId": "75794c8e-cb3f-44de-9863-32a7195074ef",
-        "configuration": {
-          "version": "v1",
-          "website": {},
-          "email": {},
-          "phone": {},
-          "termsOfService": {},
-          "privacyPolicy": {},
-          "color": "#3276EA",
-          "variant": "solid",
-          "headerVariant": "glass",
-          "themeMode": "light",
-          "fontFamily": "inter",
-          "radius": 4,
-          "feedbackEnabled": false,
-          "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)"
-        },
-        "clientId": "523cc6eb-181d-4bf2-8c6d-1c9158726bf3"
-      });
-    </script>
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/07/18/01/20250718012102-8Q7UKJYM.js" defer></script>
 </body>
 </html>

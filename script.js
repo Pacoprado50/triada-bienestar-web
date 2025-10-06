@@ -9,6 +9,148 @@ const CONFIG = {
     debounceDelay: 10
 };
 
+// Objeto de traducciones
+const translations = {
+    es: {
+        'logo': 'Triada Bienestar',
+        'nav-home': 'Inicio',
+        'nav-services': 'Servicios',
+        'nav-location': 'Ubicación',
+        'nav-contact': 'Contacto',
+        'hero-title': 'Masajes Profesionales',
+        'hero-subtitle': 'Equilibra tu ser - Siente, respira, renace',
+        'hero-description': 'Descubre el poder transformador de nuestras técnicas especializadas de masaje terapéutico, diseñadas para restaurar tu bienestar integral.',
+        'btn-explore': 'Explorar Servicios',
+        'btn-schedule': 'Agendar Cita',
+        'services-title': 'Nuestros Servicios',
+        'services-subtitle': 'Técnicas especializadas para tu bienestar integral',
+        'service-ayurveda-title': 'Masaje Ayurvédico',
+        'service-ayurveda-desc': 'Medicina tradicional de la India que utiliza aceites medicados y movimientos específicos para equilibrar las energías vitales, desintoxicar el cuerpo y promover la relajación profunda.',
+        'benefit-energy': 'Equilibrio energético',
+        'benefit-detox': 'Desintoxicación',
+        'service-swedish-title': 'Masaje Sueco',
+        'service-swedish-desc': 'Técnica clásica que utiliza movimientos largos y fluidos, amasamiento y fricción para relajar los músculos, mejorar la circulación y aliviar la tensión corporal.',
+        'benefit-muscle': 'Relajación muscular',
+        'benefit-circulation': 'Mejora circulación',
+        'service-chiro-title': 'Quiromasaje',
+        'service-chiro-desc': 'Técnica manual que utiliza diversas manipulaciones sobre los tejidos blandos para aliviar dolores musculares, mejorar la circulación y promover el bienestar general.',
+        'benefit-pain': 'Alivio del dolor',
+        'benefit-wellness': 'Bienestar general',
+        'service-shiatsu-title': 'Masaje Shiatsu',
+        'service-shiatsu-desc': 'Terapia japonesa que utiliza presión de dedos y palmas sobre puntos específicos del cuerpo para equilibrar la energía vital y mejorar la salud general.',
+        'benefit-health': 'Salud integral',
+        'service-cranio-title': 'Masaje Craneofacial',
+        'service-cranio-desc': 'Técnica especializada en cabeza, cara, cuello y hombros que ayuda a aliviar tensión, estrés, dolores de cabeza y migrañas, mejorando la circulación.',
+        'benefit-migraine': 'Alivio de migrañas',
+        'benefit-stress': 'Reduce estrés',
+        'service-champi-title': 'Masaje Champi',
+        'service-champi-desc': 'Técnica tradicional india enfocada en cabeza, cuello y hombros que alivia la tensión, mejora la circulación del cuero cabelludo y promueve la calma.',
+        'benefit-relaxation': 'Relajación profunda',
+        'benefit-scalp': 'Mejora capilar',
+        'service-sotai-title': 'Masaje Sotai',
+        'service-sotai-desc': 'Terapia japonesa de reeducación postural que corrige desequilibrios y alivia el dolor a través de movimientos suaves y naturales guiados por el terapeuta.',
+        'benefit-posture': 'Corrección postural',
+        'benefit-movement': 'Movimiento natural',
+        'service-holistic-title': 'Masaje Holístico',
+        'service-holistic-desc': 'Enfoque integral que considera cuerpo, mente y espíritu, combinando diversas técnicas para abordar el bienestar físico, emocional y mental.',
+        'benefit-integral': 'Bienestar integral',
+        'benefit-balance': 'Equilibrio total',
+        'location-title': 'Nuestra Ubicación',
+        'location-subtitle': 'Un espacio diseñado para tu tranquilidad y bienestar',
+        'cabin-title': 'Cabina de Masaje',
+        'entrance-label': 'Entrada Principal',
+        'cabin-label': 'Cabina de Masaje',
+        'environment-label': 'Ambiente Relajante',
+        'home-service-title': 'Servicio a Domicilio',
+        'home-service-desc': 'Si prefieres recibir el masaje en la comodidad de tu hogar, ofrecemos servicio a domicilio con un costo adicional por transportación (ida y regreso).',
+        'visit-us': 'Visítanos',
+        'contact-title': 'Contacto y Redes Sociales',
+        'contact-subtitle': 'Conecta con nosotros y agenda tu sesión de bienestar',
+        'contact-info-title': 'Información de Contacto',
+        'appointment-required': 'Previa cita requerida',
+        'address-title': 'Dirección',
+        'hours-title': 'Horarios',
+        'hours-schedule': 'Lunes a Viernes',
+        'hours-time': '9:00 AM - 8:00 PM PREVIA CITA',
+        'social-title': 'Síguenos en Redes Sociales',
+        'maps-link': 'Google Maps',
+        'footer-text': '© 2024 Triada Bienestar. Todos los derechos reservados.',
+        'footer-subtitle': 'Equilibra tu ser - Siente, respira, renace',
+        'whatsapp-message-base': 'Hola, me gustaría agendar una cita para un masaje',
+        'whatsapp-message-suffix': '. ¿Podrían ayudarme con la información y disponibilidad?'
+    },
+    en: {
+        'logo': 'Triada Wellness',
+        'nav-home': 'Home',
+        'nav-services': 'Services',
+        'nav-location': 'Location',
+        'nav-contact': 'Contact',
+        'hero-title': 'Professional Massages',
+        'hero-subtitle': 'Balance your being - Feel, breathe, reborn',
+        'hero-description': 'Discover the transformative power of our specialized therapeutic massage techniques, designed to restore your integral well-being.',
+        'btn-explore': 'Explore Services',
+        'btn-schedule': 'Book an Appointment',
+        'services-title': 'Our Services',
+        'services-subtitle': 'Specialized techniques for your integral well-being',
+        'service-ayurveda-title': 'Ayurvedic Massage',
+        'service-ayurveda-desc': 'Traditional Indian medicine that uses medicated oils and specific movements to balance vital energies, detoxify the body, and promote deep relaxation.',
+        'benefit-energy': 'Energy balance',
+        'benefit-detox': 'Detoxification',
+        'service-swedish-title': 'Swedish Massage',
+        'service-swedish-desc': 'Classic technique using long, fluid strokes, kneading, and friction to relax muscles, improve circulation, and relieve body tension.',
+        'benefit-muscle': 'Muscle relaxation',
+        'benefit-circulation': 'Improved circulation',
+        'service-chiro-title': 'Chiromassage',
+        'service-chiro-desc': 'Manual technique that uses various manipulations on soft tissues to relieve muscle pain, improve circulation, and promote general well-being.',
+        'benefit-pain': 'Pain relief',
+        'benefit-wellness': 'General well-being',
+        'service-shiatsu-title': 'Shiatsu Massage',
+        'service-shiatsu-desc': 'Japanese therapy that uses finger and palm pressure on specific body points to balance vital energy and improve overall health.',
+        'benefit-health': 'Integral health',
+        'service-cranio-title': 'Craniosacral Massage',
+        'service-cranio-desc': 'Specialized technique for head, face, neck, and shoulders that helps relieve tension, stress, headaches, and migraines, improving circulation.',
+        'benefit-migraine': 'Migraine relief',
+        'benefit-stress': 'Reduces stress',
+        'service-champi-title': 'Champi Massage',
+        'service-champi-desc': 'Traditional Indian technique focused on the head, neck, and shoulders that relieves tension, improves scalp circulation, and promotes calm.',
+        'benefit-relaxation': 'Deep relaxation',
+        'benefit-scalp': 'Hair improvement',
+        'service-sotai-title': 'Sotai Massage',
+        'service-sotai-desc': 'Japanese postural re-education therapy that corrects imbalances and relieves pain through gentle, natural movements guided by the therapist.',
+        'benefit-posture': 'Postural correction',
+        'benefit-movement': 'Natural movement',
+        'service-holistic-title': 'Holistic Massage',
+        'service-holistic-desc': 'Integral approach that considers body, mind, and spirit, combining various techniques to address physical, emotional, and mental well-being.',
+        'benefit-integral': 'Integral well-being',
+        'benefit-balance': 'Total balance',
+        'location-title': 'Our Location',
+        'location-subtitle': 'A space designed for your tranquility and well-being',
+        'cabin-title': 'Massage Cabin',
+        'entrance-label': 'Main Entrance',
+        'cabin-label': 'Massage Cabin',
+        'environment-label': 'Relaxing Environment',
+        'home-service-title': 'Home Service',
+        'home-service-desc': 'If you prefer to receive the massage in the comfort of your home, we offer home service with an additional cost for transportation (round trip).',
+        'visit-us': 'Visit Us',
+        'contact-title': 'Contact and Social Media',
+        'contact-subtitle': 'Connect with us and book your wellness session',
+        'contact-info-title': 'Contact Information',
+        'appointment-required': 'Appointment required',
+        'address-title': 'Address',
+        'hours-title': 'Hours',
+        'hours-schedule': 'Monday to Sunday',
+        'hours-time': '9:00 AM - 8:00 PM',
+        'social-title': 'Follow Us on Social Media',
+        'maps-link': 'Google Maps',
+        'footer-text': '© 2024 Triada Wellness. All rights reserved.',
+        'footer-subtitle': 'Balance your being - Feel, breathe, reborn',
+        'whatsapp-message-base': 'Hello, I would like to book an appointment for a massage',
+        'whatsapp-message-suffix': '. Could you help me with information and availability?'
+    }
+};
+
+let currentLang = localStorage.getItem('lang') || 'es';
+
 // Utilidades
 const Utils = {
     // Debounce function para optimizar eventos
@@ -54,10 +196,11 @@ const Utils = {
 
     // Generar mensaje de WhatsApp personalizado
     generateWhatsAppMessage(serviceName = '') {
-        const baseMessage = 'Hola, me gustaría agendar una cita para un masaje';
+        const baseMessage = translations[currentLang]['whatsapp-message-base'];
+        const suffix = translations[currentLang]['whatsapp-message-suffix'];
         return serviceName 
-            ? `${baseMessage} de ${serviceName}. ¿Podrían ayudarme con la información y disponibilidad?`
-            : `${baseMessage}. ¿Podrían ayudarme con la información y disponibilidad?`;
+            ? `${baseMessage} de ${serviceName}. ${suffix}`
+            : `${baseMessage}${suffix}`;
     },
 
     // Detectar si es dispositivo móvil
@@ -497,129 +640,54 @@ class ErrorHandler {
     }
 }
 
-// Inicialización principal
-class TriadaBienestarApp {
-    constructor() {
-        this.components = [];
-        this.init();
-    }
-
-    init() {
-        // Esperar a que el DOM esté listo
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.initializeComponents());
-        } else {
-            this.initializeComponents();
+// Función para aplicar las traducciones
+function applyTranslations(lang) {
+    document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
         }
-    }
-
-    initializeComponents() {
-        try {
-            // Inicializar todos los componentes
-            this.components = [
-                new MobileNavigation(),
-                new HeaderEffects(),
-                new ScrollAnimations(),
-                new ServiceManager(),
-                new SmoothNavigation(),
-                new ExternalLinksManager(),
-                new VisualEffects(),
-                new PerformanceOptimizer(),
-                new ErrorHandler()
-            ];
-
-            console.log('Triada Bienestar website initialized successfully');
-            this.setupAccessibility();
-            this.setupAnalytics();
-            
-        } catch (error) {
-            console.error('Error initializing Triada Bienestar app:', error);
-        }
-    }
-
-    setupAccessibility() {
-        // Mejorar accesibilidad
-        const focusableElements = document.querySelectorAll(
-            'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
-        );
-
-        focusableElements.forEach(element => {
-            element.addEventListener('focus', () => {
-                element.style.outline = '2px solid var(--primary-color)';
-                element.style.outlineOffset = '2px';
-            });
-
-            element.addEventListener('blur', () => {
-                element.style.outline = '';
-                element.style.outlineOffset = '';
-            });
-        });
-    }
-
-    setupAnalytics() {
-        // Configurar analytics básico
-        const trackPageView = () => {
-            console.log('Page view tracked');
-            // Implementar tracking real aquí
-        };
-
-        const trackUserInteraction = (action, element) => {
-            console.log(`User interaction: ${action} on ${element}`);
-            // Implementar tracking real aquí
-        };
-
-        // Track page view
-        trackPageView();
-
-        // Track scroll depth
-        let maxScrollDepth = 0;
-        const trackScrollDepth = Utils.throttle(() => {
-            const scrollDepth = Math.round(
-                (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
-            );
-            
-            if (scrollDepth > maxScrollDepth) {
-                maxScrollDepth = scrollDepth;
-                if (scrollDepth % 25 === 0) {
-                    console.log(`Scroll depth: ${scrollDepth}%`);
-                }
-            }
-        }, 1000);
-
-        window.addEventListener('scroll', trackScrollDepth);
-    }
+    });
+    // Actualizar el atributo lang del HTML
+    document.documentElement.lang = lang;
 }
 
-// Inicializar la aplicación
-const app = new TriadaBienestarApp();
-
-// Exportar para uso global si es necesario
-window.TriadaBienestar = {
-    app,
-    utils: Utils,
-    config: CONFIG
-};
-
-// Service Worker registration (opcional)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
+// Función para cambiar el idioma
+function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    applyTranslations(lang);
+    
+    // Actualizar botones de idioma
+    document.querySelectorAll('.lang-btn').forEach(button => {
+        if (button.dataset.lang === lang) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
     });
 }
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNR778R8HX">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-NNR778R8HX');
-</script>
+// Inicialización principal
+document.addEventListener('DOMContentLoaded', () => {
+    new MobileNavigation();
+    new HeaderEffects();
+    new ScrollAnimations();
+    new ServiceManager();
+    new SmoothNavigation();
+    new ExternalLinksManager();
+    new VisualEffects();
+    new PerformanceOptimizer();
+    new ErrorHandler();
+
+    // Inicializar el idioma al cargar la página
+    setLanguage(currentLang);
+
+    // Event listeners para los botones de idioma
+    document.querySelectorAll('.lang-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            setLanguage(e.target.dataset.lang);
+        });
+    });
+});
 
